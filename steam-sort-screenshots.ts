@@ -1,6 +1,6 @@
 #!/usr/bin/env -S deno run --allow-read --allow-write
 
-import * as path from 'https://deno.land/std@0.55.0/path/mod.ts';
+import * as path from 'jsr:@std/path';
 
 // sort and move Steam uncompressed screenshots into directories
 
@@ -53,8 +53,8 @@ for await (const entry of Deno.readDir(sortPath)) {
   const filePaths = {
     old: { absolute: path.resolve(sortPath, entry.name), relative: entry.name },
     new: {
-      absolute: dirPath + path.SEP + entry.name,
-      relative: dirName + path.SEP + entry.name
+      absolute: path.join(dirPath, entry.name),
+      relative: path.join(dirName, entry.name)
     }
   };
   try {
